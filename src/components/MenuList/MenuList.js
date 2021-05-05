@@ -9,7 +9,7 @@ const MenuList = () => {
     const renderLinks = (links) => {
         return links.map((link, index) => {
             return (
-                <span className={'menu'} key={index}>
+                <span key={index}>
                 <NavLink exact to={link.to}>
                     {link.label}
                 </NavLink>

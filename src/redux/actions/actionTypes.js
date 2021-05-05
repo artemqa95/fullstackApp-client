@@ -1,0 +1,1 @@
+export const FETCH_CARDS_INFO = 'FETCH_CARDS_INFO';

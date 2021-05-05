@@ -25,6 +25,10 @@ body {
     position: relative;
 }
 
+
+/*HEADER*/
+
+
 .header {
     margin-top: 5px;
     border-bottom: 1px solid #aaa0a0;
@@ -69,8 +73,25 @@ body {
     color: #ffbd04;
 }
 
+
+/*FOOTER*/
+
+
 .footer .container {
     margin: 25px auto 35px;
+}
+
+@media (max-width: 500px) {
+    .footer .container {
+        margin: 10px auto 15px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .menu {
+        margin-bottom: 10px;
+    }
 }
 
 .footer {
@@ -80,6 +101,10 @@ body {
     bottom: 0;
 }
 
+.spacer {
+    margin-bottom: 92px;
+}
+
 .footer-text {
     max-width: 300px;
 }
@@ -87,6 +112,11 @@ body {
 .contentTitle {
     background: #d7d7d7;
 }
+
+
+/*HOME*/
+
+
 
 .contentTitle .container {
     margin: 60px auto;
@@ -120,7 +150,7 @@ body {
 }
 
 .content .container {
-    margin: 10px auto 30px;
+    margin: 10px auto 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -130,14 +160,18 @@ body {
     width: 100%;
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .card {
+    display: flex;
     flex-direction: column;
+    align-items: center;
     text-align: center;
-    border: 1px solid #bfb7af;
+    max-width: 180px;
+    border: 2px solid #bfb7af;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-    width: 23%;
+    margin: 0 0 10px 10px;
 }
 
 .card-items {
@@ -145,9 +179,19 @@ body {
 }
 
 .card-logo {
-    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 180px;
-    background: #eae8e8;
+    width: 180px;
+    border-bottom: 1px solid #bebebe;
+}
+
+.card-logo img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
 }
 
 .card-name {
@@ -161,8 +205,12 @@ body {
     margin-bottom: 15px;
 }
 
+
+/*ABOUT*/
+
+
 .about .container {
-    margin: 0 auto;
+    margin: 0 auto 15px;
 }
 
 .about h1 {
@@ -172,6 +220,9 @@ body {
 .about p {
     margin: 0 10px;
 }
+
+/*AUTH*/
+
 
 .auth .container {
     margin: 0 auto;
@@ -205,6 +256,11 @@ body {
     border: 1px solid #d7d0c7;
 }
 
+
+/*ADMIN-SIDEBAR*/
+
+
+
 .content-admin {
     flex: 1;
     display: flex;
@@ -229,6 +285,15 @@ body {
     margin: 15px 0 0 15px;
 }
 
+@media (max-width: 500px) {
+    .sidebar a {
+        color: white;
+        text-decoration: none;
+        margin: 15px 5px 0 5px;
+        text-align: center;
+    }
+}
+
 .sidebar a.active {
     color: #1fbae5;
 }
@@ -237,6 +302,10 @@ body {
 .sidebar a:hover {
     color: #ffbd04;
 }
+
+/*CREATION FORM*/
+
+
 
 .content-admin-creationform {
     margin: 15px 25px;
@@ -251,7 +320,7 @@ body {
 .content-admin-creationform input {
     outline: none;
     border: 1px solid #bebebe;
-    width: 100%;
+    width: 90%;
     font-size: 20px;
 }
 
@@ -271,11 +340,130 @@ body {
     margin: 0 10px 0 0;
 }
 
-.creationform-footer-img-add {
-    color: #2187b6;
+#creationform-file {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+}
+
+.creationform-file {
+    display: flex;
+}
+
+.creationform-file label {
+    text-decoration: underline;
+    color: #1fbae5;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.creationform-file label:hover {
+    color: #ffbd04;
+}
+
+
+.creationform-message.error {
+    text-align: center;
+    color: red;
+    margin-top: 20px;
+}
+
+.creationform-message.success {
+    text-align: center;
+    color: #0547f1;
+    margin-top: 20px;
+}
+
+
+@media (max-width: 880px) {
+    .creationform-footer {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: space-between;
+        margin-top: 15px;
+    }
+
+    .creationform-footer > * {
+        margin-top: 15px;
+    }
+
+    .creationform-footer-input {
+        display: block;
+    }
+
+    .creationform-footer-input label {
+        margin: -15px 0 5px 0;
+    }
+
+    .creationform-file {
+
+    }
+}
+
+/*EDITION FORM*/
+
+
+
+.content-admin-editform {
+    margin: 15px 25px;
+    width: 100%;
+}
+
+.editform-card {
+    box-sizing: border-box;
+    height: 70px;
+    border: 1px solid #eaeaea;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    padding: 5px;
+    display: flex;
+}
+
+.editform-card-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.editform-card-icon img {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.editform-card-content {
+    width: 100%;
+    margin-left: 30px;
+}
+
+.editform-card-content p {
+    margin: 3px 0 0 0;
+    padding: 0;
+}
+
+.editform-card-content div {
+    margin-top: 10px;
+}
+
+.editform-card-delete {
+    margin-left: 10px;
+    color: red;
     cursor: pointer;
 }
 
-.creationform-footer > * {
-    margin-right: 15px;
+.editform-card-delete:hover {
+    color: #ffbd04;
+}
+
+.editform-card-edit {
+    color: #077cea;
+    cursor: pointer;
+}
+
+.editform-card-edit:hover {
+    color: #ffbd04;
 }

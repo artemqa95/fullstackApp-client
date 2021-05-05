@@ -1,6 +1,6 @@
-import menuReducer from "./menuReducer/menuReducer";
+import cardsReducer from "./cardsReducer/cardsReducer";
 import {combineReducers} from "redux";
 
 export default combineReducers({
-    menu: menuReducer
+    cards: cardsReducer
 })
