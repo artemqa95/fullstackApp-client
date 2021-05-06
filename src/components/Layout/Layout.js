@@ -10,7 +10,6 @@ import {connect} from "react-redux";
 import {autoLogin} from "../../redux/actions/auth";
 import Logout from "../Logout/Logout";
 import {useEffect} from "react";
-import HomeCards from "../HomeCards/HomeCards";
 
 
 const Layout = props => {
@@ -22,7 +21,7 @@ const Layout = props => {
         <div className={'layout'}>
             <HeaderMenu username={props.username} isLogin={!!props.token}/>
             <Switch>
-                <Route path={'/products'} render={props => <ProductsPage username={props.token && props.username}/>}/>
+                <Route path={'/products'} component={ProductsPage}/>
                 <Route path={'/about'} component={AboutPage}/>
                 <Route path={'/login'} component={LoginPage}/>
                 <Route path={'/registration'} component={RegistrationPage}/>

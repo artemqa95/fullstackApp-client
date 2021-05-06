@@ -2,12 +2,14 @@ import {NavLink, Route, Switch} from "react-router-dom";
 import ProductCreate from "../components/ProductForm/ProductForm";
 import ProductEdit from "../components/ProductEdit/ProductEdit";
 import HomeCards from "../components/HomeCards/HomeCards";
+import {connect} from "react-redux";
 
 const ProductsPage = props => {
+    console.log(props)
     return (
         <div className={'content-admin'}>
 
-            {props.username === 'administrator' ?
+            {props.username === 'administrator' && props.token?
                 <div className={'container'}>
                     <div className={'sidebar'}>
                         <NavLink to={'/products/create'}>NEW PRODUCT</NavLink>
@@ -31,4 +33,12 @@ const ProductsPage = props => {
     )
 }
 
-export default ProductsPage
+function mapStateToProps(state) {
+    return {
+        token: state.auth.token,
+        username: state.auth.username
+    }
+}
+
+
+export default connect(mapStateToProps, null)(ProductsPage)

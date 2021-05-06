@@ -40,12 +40,11 @@ export const sendLoginForm = formdata => {
 
 export const authSuccess = info => {
     return {
-        type: AUTH_SUCCESS, username: info.username, token: info.token
+        type: AUTH_SUCCESS, token:info.token, username: info.username
     }
 }
 
 export function autoLogout(time) {
-
     return dispatch => {
         setTimeout(() => {
             dispatch(logout())
