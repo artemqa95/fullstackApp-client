@@ -2,15 +2,20 @@ import logo from '../../logo/logo.png'
 import MenuList from "../MenuList/MenuList";
 import {NavLink} from "react-router-dom";
 
-const HeaderMenu = () => {
+const HeaderMenu = ({username, isLogin}) => {
     return (
         <div className={'header'}>
             <div className={'container'}>
                 <div className={'header-logo'}>
                     <img src={logo} alt="logo"/>
                 </div>
-                {false ?
-                    <div className={'header-username'}>userName</div>
+                {isLogin ?
+                    <div className={'header-logged'}>
+                        <div className={'header-username'}>{username}</div>
+                        <div className={'header-login'}>
+                            <NavLink to={'/logout'} exact>logout➲</NavLink>
+                        </div>
+                    </div>
                     :
                     <>
                         <MenuList/>

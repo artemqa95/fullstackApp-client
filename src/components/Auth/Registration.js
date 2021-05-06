@@ -1,9 +1,10 @@
 import {NavLink} from "react-router-dom";
-import is from 'is_js'
 import {useEffect, useState} from "react";
 import {SERVER_URL} from "../../config/config";
 import {connect} from "react-redux";
 import {changeRegStatus, sendRegistrationForm} from "../../redux/actions/auth";
+import {renderInputs} from "../../forms/validation";
+import {submitHandler} from "../../forms/submit";
 
 const Registration = props => {
     const [validOptions, setValidOptions] = useState({
@@ -71,83 +72,6 @@ const Registration = props => {
         // eslint-disable-next-line
     }, [props.regPreventedInfo])
 
-    const validateControl = (value, validation) => {
-        if (!validation) return true
-        let isValid = true
-        if (validation.required) {
-            isValid = value.trim() !== '' && isValid
-        }
-        if (validation.email) {
-            isValid = is.email(value) && isValid
-        }
-        if (validation.minLength) {
-            isValid = value.length >= validation.minLength && isValid
-        }
-        return isValid
-    }
-
-    const onChangeHandler = (event, controlName) => {
-        const formControls = {...validOptions.formControls}
-        const control = {...validOptions.formControls[controlName]}
-        control.value = event.target.value.trim()
-        control.valid = validateControl(control.value, control.validation)
-        formControls[controlName] = control
-        let isFormValid = true;
-        Object.keys(formControls).forEach(name => {
-            isFormValid = formControls[name].valid && isFormValid
-        })
-        setValidOptions({
-            ...validOptions, formControls, isFormValid,
-        })
-    }
-
-    const renderInputs = () => {
-        return Object.keys(validOptions.formControls).map((controlName, index) => {
-            const control = validOptions.formControls[controlName];
-            return (
-                <div key={controlName + index}>
-                    <input
-                        maxLength={'30'}
-                        key={controlName + index}
-                        type={control.type}
-                        value={control.value}
-                        name={control.name}
-                        placeholder={control.placeholder}
-                        onChange={event => onChangeHandler(event, controlName)}
-                    />
-                </div>
-            )
-        })
-    }
-
-    const submitHandler = (event) => {
-        event.preventDefault()
-        if (validOptions.isFormValid) {
-            const data = new FormData(event.target)
-            props.sendRegistrationForm(data)
-
-            const formControls = {...validOptions.formControls}
-            Object.keys(validOptions.formControls).forEach(controlName => {
-                formControls[controlName].value = '';
-                formControls[controlName].valid = false;
-            })
-            event.target.reset();
-            setValidOptions({
-                ...validOptions,
-                formControls,
-                isFormValid: false,
-                formSubmitted: true
-            })
-        } else {
-            const notValidControl = Object.keys(validOptions.formControls).find(controlName => {
-                return !validOptions.formControls[controlName].valid
-            })
-            setValidOptions({
-                ...validOptions,
-                message: validOptions.formControls[notValidControl].errorMessage
-            })
-        }
-    }
 
     const messageClasses = ['creationform-message']
     if (validOptions.message === 'Registration is success!') messageClasses.push('success')
@@ -157,10 +81,10 @@ const Registration = props => {
         <form className={'auth'}
               method={'POST'}
               action={`${SERVER_URL}/registration`}
-              onSubmit={submitHandler}>
+              onSubmit={event => submitHandler(event, validOptions, setValidOptions, props.sendRegistrationForm)}>
             <div className={'container'}>
-                <h1>LOGIN</h1>
-                {renderInputs()}
+                <h1>REGISTRATION</h1>
+                {renderInputs(validOptions, setValidOptions)}
                 <div className={'auth-buttons'}>
                     <button className={'button'}>SUBMIT</button>
                     <NavLink to={'/login'}>

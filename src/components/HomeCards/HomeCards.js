@@ -9,7 +9,6 @@ const HomeCards = props => {
         props.getCardsInfo()
         // eslint-disable-next-line
     }, [])
-    console.log(props.isLimited)
     let cards = null
     if (props.cardsInfo) {
         cards = [...props.cardsInfo]

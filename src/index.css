@@ -52,6 +52,10 @@ body {
     cursor: pointer;
 }
 
+.header-logged {
+    display: flex;
+}
+
 .header img {
     object-fit: contain;
     width: 50px;
@@ -59,7 +63,8 @@ body {
 }
 
 .header-username {
-    margin-right: 5px;
+    margin-right: 15px;
+    margin-top: 1px;
 }
 
 .menu {

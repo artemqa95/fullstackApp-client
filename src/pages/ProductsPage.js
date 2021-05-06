@@ -6,17 +6,27 @@ import HomeCards from "../components/HomeCards/HomeCards";
 const ProductsPage = props => {
     return (
         <div className={'content-admin'}>
-            <div className={'container'}>
-                <div className={'sidebar'}>
-                    <NavLink to={'/products/create'}>NEW PRODUCT</NavLink>
-                    <NavLink to={'/products/edit'}>MY PRODUCTS</NavLink>
+
+            {props.username === 'administrator' ?
+                <div className={'container'}>
+                    <div className={'sidebar'}>
+                        <NavLink to={'/products/create'}>NEW PRODUCT</NavLink>
+                        <NavLink to={'/products/edit'}>MY PRODUCTS</NavLink>
+                    </div>
+                    <Switch>
+                        <Route path={'/products/create'} component={ProductCreate}/>
+                        <Route path={'/products/edit'} component={ProductEdit}/>
+                        <Route path={'/products'} render={() => <HomeCards isLimited={false}/>}/>
+                    </Switch>
                 </div>
-                <Switch>
-                    <Route path={'/products/create'} component={ProductCreate}/>
-                    <Route path={'/products/edit'} component={ProductEdit}/>
-                    <Route path={'/products'} render={() => <HomeCards isLimited={false}/>}/>
-                </Switch>
-            </div>
+                :
+                <div className={'container'}>
+                    <div className={'sidebar'}/>
+                    <Switch>
+                        <HomeCards isLimited={false}/>
+                    </Switch>
+                </div>
+            }
         </div>
     )
 }
