@@ -1,9 +1,9 @@
 import {NavLink, Route, Switch} from "react-router-dom";
-import ProductCreate from "../components/ProductCreate/ProductCreate";
+import ProductCreate from "../components/ProductForm/ProductForm";
 import ProductEdit from "../components/ProductEdit/ProductEdit";
+import HomeCards from "../components/HomeCards/HomeCards";
 
-
-const Products = props => {
+const ProductsPage = props => {
     return (
         <div className={'content-admin'}>
             <div className={'container'}>
@@ -14,10 +14,11 @@ const Products = props => {
                 <Switch>
                     <Route path={'/products/create'} component={ProductCreate}/>
                     <Route path={'/products/edit'} component={ProductEdit}/>
+                    <Route path={'/products'} render={() => <HomeCards isLimited={false}/>}/>
                 </Switch>
             </div>
         </div>
     )
 }
 
-export default Products
+export default ProductsPage

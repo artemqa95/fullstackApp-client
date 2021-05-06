@@ -1,17 +1,19 @@
 import {SERVER_URL} from "../../config/config";
 import {connect} from "react-redux";
-import {deleteCard} from "../../redux/actions/cards";
+import {deleteCard, setEditItem} from "../../redux/actions/cards";
+import ProductCreate from "../ProductForm/ProductForm";
 
 const ProductEditCard = (props) => {
-
     const deleteHandler = () => {
         props.deleteCard({
-            id:props.id,
-            image:props.image
+            id: props.id,
+            image: props.image
         })
     }
-
-    return (
+    const editHandler = () => {
+        props.setEditItem(props.id)
+    }
+    let template = (
         <div className={'editform-card'}>
             <div className={'editform-card-icon'}>
                 <img
@@ -22,18 +24,27 @@ const ProductEditCard = (props) => {
             <div className={'editform-card-content'}>
                 <p>{props.name}</p>
                 <div>
-                    <span className={'editform-card-edit'}>Edit</span>
+                    <span className={'editform-card-edit'} onClick={editHandler}>Edit</span>
                     <span className={'editform-card-delete'} onClick={deleteHandler}>Delete</span>
                 </div>
             </div>
         </div>
-    );
+    )
+    if (props.editItemId === props.id) template = <ProductCreate isEditForm={true} cardId={props.id}/>
+    return template
 };
 
-function mapDispatchToProps(dispatch) {
+function mapStateToProps(state) {
     return {
-        deleteCard: data => dispatch(deleteCard(data))
+        editItemId: state.cards.editItemId
     }
 }
 
-export default connect(null, mapDispatchToProps)(ProductEditCard);
+function mapDispatchToProps(dispatch) {
+    return {
+        deleteCard: data => dispatch(deleteCard(data)),
+        setEditItem: id => dispatch(setEditItem(id))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductEditCard);

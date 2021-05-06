@@ -7,13 +7,13 @@ import {MAX_CARDS_NUMBER as maxCardsCount} from "../../config/config";
 const HomeCards = props => {
     useEffect(() => {
         props.getCardsInfo()
-        console.log(props.cardsInfo)
         // eslint-disable-next-line
     }, [])
+    console.log(props.isLimited)
     let cards = null
     if (props.cardsInfo) {
         cards = [...props.cardsInfo]
-        cards.slice(maxCardsCount)
+        if (props.isLimited) cards = cards.slice(0, maxCardsCount)
         cards = cards.map((card, index) => {
             return <Card
                 name={card.name}

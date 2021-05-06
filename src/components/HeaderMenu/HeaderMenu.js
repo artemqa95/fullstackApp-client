@@ -2,15 +2,15 @@ import logo from '../../logo/logo.png'
 import MenuList from "../MenuList/MenuList";
 import {NavLink} from "react-router-dom";
 
-const HeaderMenu = ({isAdmin, userName}) => {
+const HeaderMenu = () => {
     return (
         <div className={'header'}>
             <div className={'container'}>
-                <div>
+                <div className={'header-logo'}>
                     <img src={logo} alt="logo"/>
                 </div>
-                {isAdmin ?
-                    <div className={'header-username'}>{userName}</div>
+                {false ?
+                    <div className={'header-username'}>userName</div>
                     :
                     <>
                         <MenuList/>

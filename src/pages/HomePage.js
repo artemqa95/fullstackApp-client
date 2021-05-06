@@ -1,13 +1,13 @@
 import HomeTitle from "../components/HomeTitle/HomeTitle";
 import HomeCards from "../components/HomeCards/HomeCards";
 
-const Home = () => {
+const HomePage = () => {
     return (
         <>
             <HomeTitle/>
-            <HomeCards/>
+            <HomeCards isLimited={true}/>
         </>
     )
 }
 
-export default Home
+export default HomePage

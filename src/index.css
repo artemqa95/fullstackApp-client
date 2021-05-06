@@ -41,10 +41,21 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    align-content: center;
+}
+
+.header .container {
+    padding-bottom: 5px;
 }
 
 .header-login {
     cursor: pointer;
+}
+
+.header img {
+    object-fit: contain;
+    width: 50px;
+    height: 50px;
 }
 
 .header-username {
@@ -73,6 +84,19 @@ body {
     color: #ffbd04;
 }
 
+@media (max-width: 500px) {
+    .header img {
+        object-fit: contain;
+        width: 25px;
+        height: 25px;
+    }
+
+    .header-logo {
+        width: 25px;
+        height: 25px;
+    }
+}
+
 
 /*FOOTER*/
 
@@ -89,7 +113,7 @@ body {
         text-align: center;
     }
 
-    .menu {
+    .footer .menu {
         margin-bottom: 10px;
     }
 }
@@ -115,7 +139,6 @@ body {
 
 
 /*HOME*/
-
 
 
 .contentTitle .container {
@@ -239,13 +262,17 @@ body {
     margin-top: 10px;
 }
 
-.auth button {
-    margin: 0 10px;
-}
-
-.auth button a {
+.auth a {
     text-decoration: none;
     color: white;
+}
+
+.auth button {
+    min-width: 130px;
+}
+
+.auth a button {
+    width: 90%;
 }
 
 .auth input {
@@ -256,9 +283,19 @@ body {
     border: 1px solid #d7d0c7;
 }
 
+.auth-buttons > * {
+    margin: 0 10px;
+    width: 40%;
+}
+
+@media (max-width: 500px) {
+    .auth button {
+        padding: 10px 5px;
+    }
+
+}
 
 /*ADMIN-SIDEBAR*/
-
 
 
 .content-admin {
@@ -295,7 +332,7 @@ body {
 }
 
 .sidebar a.active {
-    color: #1fbae5;
+    color: #26e51f;
 }
 
 
@@ -304,7 +341,6 @@ body {
 }
 
 /*CREATION FORM*/
-
 
 
 .content-admin-creationform {
@@ -340,10 +376,12 @@ body {
     margin: 0 10px 0 0;
 }
 
-#creationform-file {
+#creationform-file,
+#creationform-id {
     opacity: 0;
     visibility: hidden;
     position: absolute;
+    width: 0;
 }
 
 .creationform-file {
@@ -379,7 +417,7 @@ body {
     .creationform-footer {
         display: flex;
         flex-direction: column;
-        align-items: start;
+        align-items: flex-start;
         justify-content: space-between;
         margin-top: 15px;
     }
@@ -395,14 +433,9 @@ body {
     .creationform-footer-input label {
         margin: -15px 0 5px 0;
     }
-
-    .creationform-file {
-
-    }
 }
 
 /*EDITION FORM*/
-
 
 
 .content-admin-editform {
