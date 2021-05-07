@@ -1,5 +1,5 @@
 import {NavLink, Redirect} from "react-router-dom";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {renderInputs} from "../../forms/validation";
 import {submitHandler} from "../../forms/submit";
 import {SERVER_URL} from "../../config/config";
@@ -40,6 +40,17 @@ const Login = props => {
         }
     })
 
+    useEffect(() => {
+        if (props.isLoginFailed && validOptions.formSubmitted) {
+            setValidOptions({
+                ...validOptions,
+                message: `Username or password is not correct`,
+                formSubmitted: false
+            })
+        }
+        // eslint-disable-next-line
+    }, [props.isLoginFailed, validOptions.formSubmitted])
+
     const messageClasses = ['creationform-message']
     if (validOptions.message === 'Registration is success!') messageClasses.push('success')
     else messageClasses.push('error')
@@ -73,7 +84,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
     return {
-        token: state.auth.token
+        token: state.auth.token,
+        isLoginFailed: state.auth.isLoginFailed
     }
 }
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 import {SERVER_URL} from "../../config/config";
-import {CHECK_REGISTRATION_STATUS, AUTH_LOGOUT, AUTH_SUCCESS} from "./actionTypes";
+import {CHECK_REGISTRATION_STATUS, AUTH_LOGOUT, AUTH_SUCCESS, AUTH_FAILED} from "./actionTypes";
 
 export const sendRegistrationForm = formdata => {
     return async dispatch => {
@@ -31,6 +31,8 @@ export const sendLoginForm = formdata => {
                 const {token,username} = response.data.token
                 dispatch(authSuccess({token, username}))
                 dispatch(autoLogout((new Date(response.data.expirationDate).getTime() - new Date().getTime())))
+            } else {
+                dispatch(authFailed())
             }
         } catch (e) {
             console.warn(e)
@@ -41,6 +43,12 @@ export const sendLoginForm = formdata => {
 export const authSuccess = info => {
     return {
         type: AUTH_SUCCESS, token:info.token, username: info.username
+    }
+}
+
+export const authFailed = () => {
+    return {
+        type: AUTH_FAILED
     }
 }
 
